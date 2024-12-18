@@ -1,12 +1,20 @@
 const mongoose = require("mongoose");
-const User = require("./userModel");
-
-const publicationSchema = new mongoose.Schema({
+const User = require("../Models/userModel");
+ 
+const recipeSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
   },
-  content: {
+  ingredients: {
+    type: [String],
+    required: true,
+  },
+  instructions: {
+    type: String,
+    required: true,
+  },
+  cuisineType: {
     type: String,
     required: true,
   },
@@ -14,13 +22,12 @@ const publicationSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  tags: {
-    type: [String],
-    required: true,
-  },
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: User,
     required: true,
   },
 });
+ 
+module.exports = mongoose.model("Recipe", recipeSchema);
+ 

@@ -68,7 +68,7 @@ const updateUser = async (req, res) => {
   }
 };
 
-const deleteUser = async (req, res) => {
+const deleteUsers = async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.user.id);
     if (!user) {
@@ -80,6 +80,23 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  try {
+    const userId = req.params.id; // Récupère l'ID depuis l'URL
+
+    const user = await User.findByIdAndDelete(userId);
+    if (!user) {
+      return res.status(404).send({ error: "Utilisateur introuvable" });
+    }
+
+    res.status(200).send({ message: "Utilisateur supprimé avec succès" });
+  } catch (error) {
+    res.status(500).send({ message: "Erreur serveur : " + error.message });
+  }
+};
+
+
+
 
 const getUsers = async (req, res) => {
   try {
@@ -89,6 +106,10 @@ const getUsers = async (req, res) => {
       filter.username = { $regex: req.query.username, $options: "i" };
     }
 
+    if (req.query.email) {
+      filter.email = { $regex: req.query.email, $options: "i" };
+    }
+
     const users = await User.find(filter).select("-password");
     res.status(200).send(users);
   } catch (error) {
@@ -96,4 +117,4 @@ const getUsers = async (req, res) => {
   }
 };
 
-module.exports = { Register, Login, updateUser, deleteUser, getUsers };
+module.exports = { Register, Login, updateUser, deleteUser, getUsers, deleteUsers};
