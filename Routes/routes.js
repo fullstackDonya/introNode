@@ -14,6 +14,7 @@ const {
   updatePost,
   getPostByUserId,
   deletePost,
+  getPostById,
 } = require("../Controllers/postController");
 const router = express.Router();
 
@@ -23,10 +24,11 @@ router.put("/update/:id", authMiddleware, updateUser);
 router.delete("/delete", authMiddleware, deleteUsers);
 router.delete("/delete/:id", authMiddleware, deleteUser);
 router.get("/users", authMiddleware, getUsers);
+router.get("/post/user/:userId", authMiddleware, getPostByUserId);
 router.post("/post", authMiddleware, createPost);
 router.get("/posts", authMiddleware, getPosts);
-router.put("/post/:postId", authMiddleware, updatePost);
-router.get("/post/:userId", authMiddleware, getPostByUserId);
-router.delete("/post/:postId", authMiddleware, deletePost);
+router.put("/post/:id", authMiddleware, updatePost);
+router.get("/post/:id", authMiddleware, getPostById);
+router.delete("/post/:id", authMiddleware, deletePost);
 
 module.exports = router;

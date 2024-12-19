@@ -1,7 +1,8 @@
 const Post = require("../Models/postModel");
 
 const createPost = async (req, res) => {
-  const authorId = req.user.id; // L'utilisateur connecté est l'auteur
+  const authorId = req.user.id; 
+  
   try {
     const post = new Post({
       ...req.body,
@@ -19,7 +20,6 @@ const getPosts = async (req, res) => {
   try {
     const filter = {};
 
-    // Filtres dynamiques pour les recherches
     if (req.query.title) {
       filter.title = { $regex: req.query.title, $options: "i" };
     }
@@ -45,9 +45,25 @@ const getPosts = async (req, res) => {
 
 const updatePost = async (req, res) => {
   try {
-    const post = await Post.findByIdAndUpdate(req.params.postId, req.body, {
+    const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
+    if (!post) {
+      return res.status(404).send({ error: "Annonce introuvable" });
+    }
+    res.status(200).send(post);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
+const getPostById = async (req, res) => {
+  console.log(req.params.id);
+  try {
+    const post = await Post.findById(req.params.id).populate("author", "username email");
+    console.log(post);
+    
+    
     if (!post) {
       return res.status(404).send({ error: "Annonce introuvable" });
     }
@@ -74,7 +90,7 @@ const getPostByUserId = async (req, res) => {
 
 const deletePost = async (req, res) => {
   try {
-    const post = await Post.findByIdAndDelete(req.params.postId);
+    const post = await Post.findByIdAndDelete(req.params.id);
     if (!post) {
       return res.status(404).send({ error: "Annonce introuvable" });
     }
@@ -90,4 +106,5 @@ module.exports = {
   updatePost,
   getPostByUserId,
   deletePost,
+  getPostById,
 };
