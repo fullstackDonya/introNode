@@ -117,4 +117,24 @@ const getUsers = async (req, res) => {
   }
 };
 
+
+const getUser = async (req, res) => {
+  try {
+    const filter = {};
+
+    if (req.query.username) {
+      filter.username = { $regex: req.query.username, $options: "i" };
+    }
+
+    if (req.query.email) {
+      filter.email = { $regex: req.query.email, $options: "i" };
+    }
+
+    const users = await User.find(filter).select("-password");
+    res.status(200).send(users);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
 module.exports = { Register, Login, updateUser, deleteUser, getUsers, deleteUsers};
