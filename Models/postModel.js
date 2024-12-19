@@ -27,16 +27,6 @@ const postSchema = new mongoose.Schema({
       type: String, 
     },
   ],
-  contactInfo: {
-    phone: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: false, 
-    },
-  },
   isSold: {
     type: Boolean,
     default: false, 
