@@ -6,6 +6,7 @@ const {
   deleteUsers,
   deleteUser,
   getUsers,
+  getUser,
 } = require("../Controllers/userController");
 const authMiddleware = require("../Middleware/authMiddleware");
 const {
@@ -24,6 +25,7 @@ router.put("/update/:id", authMiddleware, updateUser);
 router.delete("/delete", authMiddleware, deleteUsers);
 router.delete("/delete/:id", authMiddleware, deleteUser);
 router.get("/users", authMiddleware, getUsers);
+router.get("/user/:id", authMiddleware, getUser);
 router.get("/post/user/:userId", authMiddleware, getPostByUserId);
 router.post("/post", authMiddleware, createPost);
 router.get("/posts", authMiddleware, getPosts);
