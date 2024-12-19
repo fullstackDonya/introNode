@@ -9,12 +9,12 @@ const {
 } = require("../Controllers/userController");
 const authMiddleware = require("../Middleware/authMiddleware");
 const {
-  createRecipe,
-  getRecipes,
-  updateRecipe,
-  getRecipeByUserId,
-  deleteRecipe,
-} = require("../Controllers/recipeController");
+  createPost,
+  getPosts,
+  updatePost,
+  getPostByUserId,
+  deletePost,
+} = require("../Controllers/postController");
 const router = express.Router();
 
 router.post("/register", Register);
@@ -23,10 +23,10 @@ router.put("/update/:id", authMiddleware, updateUser);
 router.delete("/delete", authMiddleware, deleteUsers);
 router.delete("/delete/:id", authMiddleware, deleteUser);
 router.get("/users", authMiddleware, getUsers);
-router.post("/recipe", authMiddleware, createRecipe);
-router.get("/recipes", authMiddleware, getRecipes);
-router.put("/recipe/:recipeId", authMiddleware, updateRecipe);
-router.get("/recipe/:userId", authMiddleware, getRecipeByUserId);
-router.delete("/recipe/:recipeId", authMiddleware, deleteRecipe);
+router.post("/post", authMiddleware, createPost);
+router.get("/posts", authMiddleware, getPosts);
+router.put("/post/:postId", authMiddleware, updatePost);
+router.get("/post/:userId", authMiddleware, getPostByUserId);
+router.delete("/post/:postId", authMiddleware, deletePost);
 
 module.exports = router;

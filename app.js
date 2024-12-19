@@ -17,7 +17,7 @@ const mongoose = require("mongoose");
 // });
 
 mongoose
-  .connect("mongodb://localhost:27017/cuisineapinode", {})
+  .connect("mongodb://localhost:27017/leboncoin", {})
   .then(() => {
     console.log("Connected to the mongoDB database!");
   })
