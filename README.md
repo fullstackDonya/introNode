@@ -6,7 +6,7 @@ Ce projet est une API RESTful pour gérer des annonces, comprenant des fonctionn
 
 Prérequis
 
-Node.js installé (version 14 ou supérieure)
+Node.js installé (version 16 - 18)
 
 MongoDB en cours d'exécution
 
@@ -14,7 +14,7 @@ Installation
 
 Clonez ce dépôt :
 
-git clone <url-du-repo-backend>
+git clone <https://github.com/fullstackDonya/introNode>
 
 Naviguez dans le dossier du backend :
 
